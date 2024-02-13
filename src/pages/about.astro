@@ -1,19 +1,9 @@
 ---
-import Cabecera from "../components/Cabecera.astro";
-import PiePg from "../components/PiePg.astro";
+import Base from '../layouts/Base.astro';
+const tituloPg = 'Sobre mi';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <Cabecera />
-    <h1>Sobre mi</h1>
+<Base tituloPg={tituloPg}>
     <h2>... ¡y mi nuevo sitio Astro!</h2>
 
     <p>
@@ -25,6 +15,4 @@ import PiePg from "../components/PiePg.astro";
       Este sitio se irá actualizando a medida que vaya completando más partes
       del tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!
     </p>
-    <PiePg />
-  </body>
-</html>
+  </Base>
