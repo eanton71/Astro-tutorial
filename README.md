@@ -87,3 +87,19 @@ Cramos una pagina `about.astro`. Podemos copiar el cidogo del la pagina index. M
   <p>Este sitio se irá actualizando a medida que vaya completando más partes del tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!</p>
 </body>
 ```
+## Navegacion entre paginas
+Incluimos en todas las dos paginas los enlaces de ambas:
+```html
+<a href="/">Inicio</a>
+<a href="/about/">Sobre mi</a>
+````
+Creamos una pagina para el blog y ñadimos en enlace a esta en las paginas
+```html
+ <body>
+    <a href="/">Inicio</a>
+    <a href="/about/">Sobre mi</a>
+    <a href="/blog/">Blog</a>
+    <h1>Blog en Astro</h1>
+    <p>aqui pondre las entradas de blog</p>
+</body>
+```
