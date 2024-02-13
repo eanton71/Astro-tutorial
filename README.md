@@ -66,4 +66,24 @@ Ver en el navegador en la direccion `http://localhost:4321`
 - Arriaba ala izquierda (Control de codio fuente) Ir a  menu ... y seleccionar Remoto-> add remoto
 - Te pedira iniciar sesion en Github. Despues se abre una pestaña arriba donde se elige el repositior al que se quiere mandar
 
+## Desplegar el sitio en la web
+- Crear una cuenta en Netlify. 
+- Para añadir un nuvevo sitio ir a la pestaña Sites y al boton a la derecha `Add new site`. 
+- Se le puede añadir un proyecto desde Github `Import a existing project`, despues `Deploy with Github`
+- Saldra una lista con los repositirios de Github despues de autorizar la entrada a nuestro Github.
 
+## Crear nuevas paginas 
+
+En la carpeta `src/pages/` crearemos las nuevas paginas:
+Cramos una pagina `about.astro`. Podemos copiar el cidogo del la pagina index. Modificamcos olo que hay dentro del `<body>':
+```html
+<body>
+  <h1>Mi sitio Astro</h1>
+  <h1>Sobre mi</h1>
+  <h2>... ¡y mi nuevo sitio Astro!</h2>
+
+  <p>Estoy trabajando en el tutorial introductorio de Astro. Esta es la segunda página de mi sitio web, ¡y es la primera que he construido yo mismo!</p>
+
+  <p>Este sitio se irá actualizando a medida que vaya completando más partes del tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!</p>
+</body>
+```
