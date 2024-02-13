@@ -103,3 +103,24 @@ Creamos una pagina para el blog y ñadimos en enlace a esta en las paginas
     <p>aqui pondre las entradas de blog</p>
 </body>
 ```
+
+## Archivos Markdown
+- Creamos un directorio para las paginas del blog en una carpeta nueva `blog`dentro de `src/pages`
+- Añadimos un nuevo fichero con extension `md`
+```md
+data: 2022-07-01 
+autor: 'Alumno de Astro' 
+tags: ["astro", "bloguear", "aprender en público"]
+---
+# Mi primera publicación en el blog
+
+Publicado el: 2022-07-01
+...
+````
+- Se puede ver como queda al acceder a `http://localhost:4321/blog/1`
+- Añadimos el enlace de la nueva pagina en la pagina `blog`
+```html
+<ul>
+    <li><a href="/blog/1/">Publicación 1</a></li>
+</ul>
+```
