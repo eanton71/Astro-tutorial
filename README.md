@@ -155,13 +155,27 @@ Añadimos mas publicaciones `md`y sus enlaces en la pagina blog
 Son fragmentos de html reutilizables y que nos permiten ahorrar codigo y tiempo.
 Podemos hacer distintos componentes para los elementos de la pagina:
 
-- Navegacion
+- Cabecera (Header)
+- Navegacion, que  se incluye en la cabecera
 - Pie de pagina
 - Redes sociales, que se incluira en el pie de pagina
 
 Pasos:
 
 - Crear una carpeta `src/components`
+- Crear componente Cabecera:
+  > Cabecera.astro
+  > ```html
+  > ---
+  > import Navigation from './Navigation.astro';
+  > ---
+  > <header>
+  >   <nav>
+  >     <Navigation />
+  >   </nav>
+  > </header>
+  > ```
+
 - Crear componente de Navegacion:
   > Navegacion.astro
   >
@@ -174,12 +188,12 @@ Pasos:
   > <a href="/blog/">Blog</a>
   > ```
   >
-  > Importarlo en las paginas y eliminar el codigo de navegacion sustituyendolo por la etiqueta `<Navegacion /> .
+  > Importarlo en las paginas y eliminar el codigo de navegacion sustituyendolo por la etiqueta `<Cabecera /> .
   > index.astro, blog.astro, about.astro
   >
   > ```js
   > ---
-  > import Navegacion from '../components/Navegacion.astro';
+  > import Cabecera from '../components/Cabecera.astro';
   > ---
   > ```
 - Creamos los componentes Pie de Pagina y para las redes sociales que estara incluido en este:
@@ -202,3 +216,7 @@ Pasos:
   > ---
   > <a href={`https://www.${platform}.com/${username}`}>{platform}</a>
   > ```
+
+  - Importamos en las paginas astro y añadimos `<PiePg />` al final de las paginas.
+
+  - Mas adelante añadiremos estilos
