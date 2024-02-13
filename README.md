@@ -57,13 +57,13 @@ Ejecutar  en modo desarrollo
 ```sh
 pnpm run dev
 ````
-Ver en el navegador `http://localhost:4321`
+Ver en el navegador en la direccion `http://localhost:4321`
 
 ## Almacenar en un repositorio en linea
-Crear repostiroio en Github
-Subir el codigo local a  al repositorio de Github
-Puede ser necesario instalar git (lo indicara VS Code)
-Arriaba ala izquierda (Control de codio fuente) Ir a  menu ... y seleccionar Remoto-> add remoto
-Te pedira iniciar sesion en Github. Despues se abre una pestaña arriba donde se elige el repositior al que se quiere mandar
+- Crear repostiroio en Github
+- Subir el codigo local a  al repositorio de Github
+- Puede ser necesario instalar git (lo indicara VS Code)
+- Arriaba ala izquierda (Control de codio fuente) Ir a  menu ... y seleccionar Remoto-> add remoto
+- Te pedira iniciar sesion en Github. Despues se abre una pestaña arriba donde se elige el repositior al que se quiere mandar
 
 
