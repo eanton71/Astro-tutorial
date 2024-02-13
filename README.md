@@ -93,3 +93,13 @@ Incluimos en todas las dos paginas los enlaces de ambas:
 <a href="/">Inicio</a>
 <a href="/about/">Sobre mi</a>
 ````
+Creamos una pagina para el blog y ñadimos en enlace a esta en las paginas
+```html
+ <body>
+    <a href="/">Inicio</a>
+    <a href="/about/">Sobre mi</a>
+    <a href="/blog/">Blog</a>
+    <h1>Blog en Astro</h1>
+    <p>aqui pondre las entradas de blog</p>
+</body>
+```
