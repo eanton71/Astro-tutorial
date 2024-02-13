@@ -182,3 +182,23 @@ Pasos:
   > import Navegacion from '../components/Navegacion.astro';
   > ---
   > ```
+- Creamos los componentes Pie de Pagina y para las redes sociales que estara incluido en este:
+  > PiePg.astro
+  >```javascript
+  >---
+  >import Social from './Social.astro';
+  >---
+  ><footer>
+  >  <Social platform="twitter" username="astrodotbuild" />
+  >  <Social platform="github" username="withastro" />
+  >  <Social platform="youtube" username="astrodotbuild" />
+  ></footer>
+  >```
+
+  > Social.astro
+  > ```html
+  > ---
+  > const { platform, username } = Astro.props;
+  > ---
+  > <a href={`https://www.${platform}.com/${username}`}>{platform}</a>
+  > ```
