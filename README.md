@@ -220,3 +220,48 @@ Pasos:
   - Importamos en las paginas astro y añadimos `<PiePg />` al final de las paginas.
 
   - Mas adelante añadiremos estilos
+
+  ## Plantillas   
+
+- Sirven para refactorizar elementos comune a varias paginas. Incluyeb el codigo repetido en estas como el contenido de `<head>`, el  contenido de 
+  navegacion, el pie de pagina, ...
+- En la plantilla qse incluye el tag `<slot /> `, que 
+en la pagina sera cambiado por el conteinido que se pone entre las etiuetas de la plantilla
+- En la plantilla se incluyen variables que se passan a Astro.props. 
+
+-   Creamos una nueva carpeta `src/layouts` y creamos una plantillas para las paginas: 
+  > Base.astro
+  >```html
+  >---
+  >import Cabecera from '../components/Cabecera.astro';
+  >import PiePg from '../components/Cabecera.astro';
+  >const {tituloPg} = "Astro.props;
+  >---
+  ><html lang="es">
+  >  <head>
+  >    <meta charset="utf-8" />
+  >    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  >    <meta name="viewport" content="width=device-width" />
+  >    <meta name="generator" content={Astro.generator} />
+  >    <title>{tituloPg}</title>
+  >  </head>
+  >  <body>
+  >    <Header />
+  >    <h1>{tituloPg}</h1>
+  >    <slot />
+  >    <Footer />     
+  >  </body>
+  ></html>
+  >```
+
+  Se importa en las paginas:
+  >   index.astro
+  >   ```html
+  > ---
+  > import BaseLayout from '../layouts/BaseLayout.astro';
+  > const pageTitle = "Página de inicio";
+  > ---
+  > <BaseLayout tituloPg = {tituloPg}>
+  >   <h2>Mi impresionante subtítulo del blog</h2>
+  > </BaseLayout>
+  >   ```

@@ -1,25 +1,13 @@
 ---
-import Cabecera from "../components/Cabecera.astro";
-import PiePg from "../components/PiePg.astro";
+import Base from '../layouts/Base.astro';
+const tituloPg = 'Blog';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <Cabecera />
-    <h1>Blog en Astro</h1>
+<Base  tituloPg={tituloPg}>
     <p>aqui pondre las entradas de blog</p>
     <ul>
       <li><a href="/blog/1">Publicación 1</a></li>
       <li><a href="/blog/2">Publicación 2</a></li>
       <li><a href="/blog/3">Publicación 3</a></li>
     </ul>
-    <PiePg/>
-  </body>
-</html>
+  </Base>
