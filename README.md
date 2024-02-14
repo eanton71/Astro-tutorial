@@ -221,7 +221,7 @@ Pasos:
 
   - Mas adelante añadiremos estilos
 
-## Plantillas   
+## Plantillas   
 
 - Sirven para refactorizar elementos comune a varias paginas. Incluyeb el codigo repetido en estas como el contenido de `<head>`, el  contenido de 
   navegacion, el pie de pagina, ..., estilos CSS, scripts, etc...
@@ -304,3 +304,31 @@ en la pagina sera cambiado por el conteinido que se pone entre las etiuetas de l
 
 - Cuando se renderice en la web e mostrara la estructura general de la web y en el lugar de la entrada de blog, en la forma en que se indica en la plantilla `MDPostLayout.astro` que esta definida en la variable `layout`: Titulo de la pagina(en pestaña superior y en H1: "Mi segunda publiacacion en el blog", publicado en 2022-07-01 EScrito por ' Alumno de Astro'). En la parte definida por la etiqueta `<slot>`, el texto de la entrada de blog.
 
+## Entradas de blog dinamicas con  `Astro.glob()`
+- En vez de tener que poner un enlace para cada entrada nueva en la pagina de blog podenmos acceder  dinamicamente a todas los archivos markdopwn que se encuentren en la pagina blog.
+- Añadimos en el frontmatter de la pagina del blog una variable donde guiardamos la llamada a AStro.glob() de forma asincrona `await`.
+- Daremos opcion tambien para incluir archivos MDX. Estos son archivos markdown que permiten el uso de javascreipt y compoentes integrados en el archivo.
+- PAra poder usar archivos MDX es necesario instalar la integracion con MDX con el comando `pnpm astro add mdx`. TAmbien modificar el archivo:
+   > __astro.config.mjs__
+   > ```mjs
+   > import { defineConfig } from 'astro/config';
+   > import mdx from '@astrojs/mdx';
+   > export default defineConfig({
+   >   // ...
+   >   integrations: [mdx()],
+   > });
+   > ```
+   > __blog.astro__
+   > ```js
+   > ---
+   > const posts = await Astro.glob('../pages/blog/*.{md,mdx}');
+   > ---
+   > ```
+   > ```html
+   > <ul>
+   >   {posts.map((post) => 
+   >     <li>
+   >       <a href={post.url}>{post.frontmatter.titulo}</a>
+   >     </li>)}
+   > </ul>
+```
