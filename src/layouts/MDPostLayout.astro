@@ -1,0 +1,9 @@
+---
+import BaseLayout from "./Base.astro";
+const { frontmatter } = Astro.props;
+---
+<BaseLayout tituloPg={frontmatter.titulo}> 
+  <p>Publicado el {frontmatter.data.slice(0, 10)}</p> 
+  <p>Escrito por: {frontmatter.autor}</p> 
+  <slot />
+</BaseLayout>

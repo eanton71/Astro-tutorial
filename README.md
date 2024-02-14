@@ -221,11 +221,11 @@ Pasos:
 
   - Mas adelante añadiremos estilos
 
-  ## Plantillas   
+## Plantillas   
 
 - Sirven para refactorizar elementos comune a varias paginas. Incluyeb el codigo repetido en estas como el contenido de `<head>`, el  contenido de 
-  navegacion, el pie de pagina, ...
-- En la plantilla qse incluye el tag `<slot /> `, que 
+  navegacion, el pie de pagina, ..., estilos CSS, scripts, etc...
+- En la plantilla qse incluye el tag __`<slot /> `__, que 
 en la pagina sera cambiado por el conteinido que se pone entre las etiuetas de la plantilla
 - Astro.props nos permite pasar variables llamadas '__PROPS__', cuyo valor sera inicializado en la declaracion del layout , en la pagina donde se utilizara. 
 
@@ -256,7 +256,7 @@ en la pagina sera cambiado por el conteinido que se pone entre las etiuetas de l
     ></html>
     >```
 
-  - Se importa en las paginas elimnando sustituyendoi el codigo  que incluyen por la etiqueta `<Base > </Base>`. La etiqueta inicializa el __prop__  pageTitle con el valor que le queramos dar a esta pagina enc concreto. Para la pagina de inicio: "Pagina de inicio", Para la pagina del blog: "Entradas del blog", etc...:
+  - Se importa en las paginas elimnando sustituyendoi el codigo  que incluyen por la etiqueta `<Base > </Base>`. La etiqueta inicializa el __prop__  pageTitle con el valor que le queramos dar a esta pagina enc concreto. Para la pagina de inicio: "Pagina de inicio", Para la pagina del blog: "Blog", etc...:
 
      >   index.astro
      >   ```js
@@ -271,4 +271,36 @@ en la pagina sera cambiado por el conteinido que se pone entre las etiuetas de l
      > </BaseLayout>
      >   ```
    
-   
+## Plantillas para archivos markdown
+- Igual que las plantillas para paginas. En este caso se puede incluir la palabra frontmatter como __prop__. De esta manera se pasan todos llos valores __YAML__ del __frontmatter__ como props al archivo `md`.
+- Para que el contenido de la entrada de blog vaya integrado en el esquema general de la pagina web es enecesario integrar la plantilla base para las pagtinas astro. De esta manera :
+  > __MDPostLayout.astro__
+  >```javascript
+  >---
+  >import BaseLayout from "./Base.astro";
+  >const { frontmatter } = Astro.props;
+  >---
+  >```
+  >```html
+  ><BaseLayout tituloPg={frontmatter.titulo}> 
+  >  <p>Publicado el {frontmatter.data.slice(0, 10)}</p> 
+  >  <p>Escrito por: {frontmatter.autor}</p> 
+  >  <slot />
+  ></BaseLayout>
+  >```
+
+- En cada archivo markdown se importara el layout de esta manera:
+  > __post.md__
+  > ```js
+  > ---
+  > layout: ../../layouts/MDPostLayout.astro
+  > titulo: 'Mi segunda publicación en el blog'
+  > data: 2022-07-01 
+  > autor: 'Alumno de Astro' 
+  > tags: ["astro", "bloguear", "aprender en público"]
+  > ---
+  >  texto del blog
+  > ```
+
+- Cuando se renderice en la web e mostrara la estructura general de la web y en el lugar de la entrada de blog, en la forma en que se indica en la plantilla `MDPostLayout.astro` que esta definida en la variable `layout`: Titulo de la pagina(en pestaña superior y en H1: "Mi segunda publiacacion en el blog", publicado en 2022-07-01 EScrito por ' Alumno de Astro'). En la parte definida por la etiqueta `<slot>`, el texto de la entrada de blog.
+
