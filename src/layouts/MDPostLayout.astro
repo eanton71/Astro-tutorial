@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "./Base.astro";
 const { frontmatter } = Astro.props;
+const fechaSp = (date)=> new Intl.DateTimeFormat('es',{dateStyle:'long'}).format(date); 
 ---
 <BaseLayout tituloPg={frontmatter.titulo}> 
-  <p>Publicado el {frontmatter.data.slice(0, 10)}</p> 
+  <p>Publicado el {fechaSp(frontmatter.fecha)}</p> 
   <p>Escrito por: {frontmatter.autor}</p> 
   <slot />
 </BaseLayout>

@@ -132,9 +132,7 @@ autor: 'Alumno de Astro'
 tags: ["astro", "bloguear", "aprender en público"]
 
 ---
-
 # Mi primera publicación en el blog
-
 Publicado el: 2022-07-01
 ...
 ```
@@ -162,8 +160,7 @@ Podemos hacer distintos componentes para los elementos de la pagina:
 
 Pasos:
 
-- Crear una carpeta `src/components`
-- Crear componente Cabecera:
+- Crear una carpeta `src/components` y dentro los archivos:  
   > Cabecera.astro
   > ```html
   > ---
@@ -175,8 +172,8 @@ Pasos:
   >   </nav>
   > </header>
   > ```
-
-- Crear componente de Navegacion:
+ 
+  
   > Navegacion.astro
   >
   > ```html
@@ -188,7 +185,7 @@ Pasos:
   > <a href="/blog/">Blog</a>
   > ```
   >
-  > Importarlo en las paginas y eliminar el codigo de navegacion sustituyendolo por la etiqueta `<Cabecera /> .
+- Importarlo en las paginas y eliminar el codigo de navegacion sustituyendolo por la etiqueta `<Cabecera /> .
   > index.astro, blog.astro, about.astro
   >
   > ```js
@@ -210,24 +207,26 @@ Pasos:
   >```
 
   > Social.astro
-  > ```html
+  > ```js
   > ---
   > const { platform, username } = Astro.props;
   > ---
+  > ```
+  > ```html
   > <a href={`https://www.${platform}.com/${username}`}>{platform}</a>
   > ```
 
-  - Importamos en las paginas astro y añadimos `<PiePg />` al final de las paginas.
+- Importamos en las paginas astro y añadimos `<PiePg />` al final de las paginas.
 
-  - Mas adelante añadiremos estilos
+- Mas adelante añadiremos estilos
 
 ## Plantillas   
 
 - Sirven para refactorizar elementos comune a varias paginas. Incluyeb el codigo repetido en estas como el contenido de `<head>`, el  contenido de 
   navegacion, el pie de pagina, ..., estilos CSS, scripts, etc...
 - En la plantilla qse incluye el tag __`<slot /> `__, que 
-en la pagina sera cambiado por el conteinido que se pone entre las etiuetas de la plantilla
-- Astro.props nos permite pasar variables llamadas '__PROPS__', cuyo valor sera inicializado en la declaracion del layout , en la pagina donde se utilizara. 
+en la pagina sera cambiado por el conteinido que se pone entre las etiquetas de la plantilla
+- `Astro.props` nos permite pasar variables llamadas '__PROPS__', cuyo valor sera inicializado en la declaracion del layout , en la pagina donde se utilizara. 
 
 -   Creamos una nueva carpeta `src/layouts` y creamos una plantillas para las paginas: 
     > Base.astro
@@ -256,7 +255,7 @@ en la pagina sera cambiado por el conteinido que se pone entre las etiuetas de l
     ></html>
     >```
 
-  - Se importa en las paginas elimnando sustituyendoi el codigo  que incluyen por la etiqueta `<Base > </Base>`. La etiqueta inicializa el __prop__  pageTitle con el valor que le queramos dar a esta pagina enc concreto. Para la pagina de inicio: "Pagina de inicio", Para la pagina del blog: "Blog", etc...:
+  - Se importa en las paginas sustituyendo el codigo  que incluyen por la etiqueta `<Base > </Base>`. La etiqueta inicializa el __prop__  pageTitle con el valor que le queramos dar a esta pagina en concreto. Para la pagina de inicio: "Pagina de inicio", Para la pagina del blog: "Blog", etc...:
 
      >   index.astro
      >   ```js
@@ -305,6 +304,8 @@ en la pagina sera cambiado por el conteinido que se pone entre las etiuetas de l
 - Cuando se renderice en la web e mostrara la estructura general de la web y en el lugar de la entrada de blog, en la forma en que se indica en la plantilla `MDPostLayout.astro` que esta definida en la variable `layout`: Titulo de la pagina(en pestaña superior y en H1: "Mi segunda publiacacion en el blog", publicado en 2022-07-01 EScrito por ' Alumno de Astro'). En la parte definida por la etiqueta `<slot>`, el texto de la entrada de blog.
 
 ## Entradas de blog dinamicas con  `Astro.glob()`
+
+
 - En vez de tener que poner un enlace para cada entrada nueva en la pagina de blog podenmos acceder  dinamicamente a todas los archivos markdopwn que se encuentren en la pagina blog.
 - Añadimos en el frontmatter de la pagina del blog una variable donde guiardamos la llamada a AStro.glob() de forma asincrona `await`.
 - Daremos opcion tambien para incluir archivos MDX. Estos son archivos markdown que permiten el uso de javascreipt y compoentes integrados en el archivo.
@@ -325,10 +326,111 @@ en la pagina sera cambiado por el conteinido que se pone entre las etiuetas de l
    > ---
    > ```
    > ```html
+   >   ...
    > <ul>
    >   {posts.map((post) => 
    >     <li>
    >       <a href={post.url}>{post.frontmatter.titulo}</a>
    >     </li>)}
    > </ul>
-```
+   >   ...
+   >```
+
+
+
+
+# Colecciones de contenido
+Sirven para gestionar grupos de archivos con contenido similar, por ejemplo un blog.
+
+
+- Actualiza a Astro v4.x
+  > ```bash
+  > pnpm install astro@latest
+  > ```
+
+- Configurar Typescript en el archivo tsconfig.json. Configuracion si no se usa Typescript: 
+  > __tsconfig.json__
+  > ```json
+  > {
+  >   // Nota: No se necesitan cambios si se utiliza "astro/tsconfigs/strict" o "astro/tsconfigs/strictest"
+  >   "extends": "astro/tsconfigs/base",
+  >   "compilerOptions": {
+  >     "strictNullChecks": true,
+  >     "allowJs": true
+  >   }
+  > }
+  > ```
+
+- Hay que mover las publicaciones a un nuevo directorio: `src/content`. Dentro de este, a una carpeta llamada por ejemplo `blog`.
+## Archivo de esquema `config.ts`
+- Crear un archivo en la carpeta `src/content` con el nombre `config.ts` donde definiremos un esquema para la coleccion que llamaremos `blogColeccion`
+  >__config.ts__
+  >```ts 
+  >import { z, defineCollection } from "astro:content"; 
+  >const blogColeccion = defineCollection({
+  >    type: 'content',
+  >    schema: z.object({
+  >      titulo: z.string(),
+  >      data: z.date(), 
+  >      autor: z.string(), 
+  >      tags: z.array(z.string())
+  >    })
+  >}); 
+  >export const colecciones = {
+  >  blog: blogColeccion,
+  >};
+  >```
+- Ejecutar el comando `npx astro sync` despues de parar el servidor (despues reiniciarlo). Esto hace que astro reconozca el esquema. 
+
+## `[...slug].astro` 
+- En la carpeta `src/pages/blog` donde estaban antes los archivos md,mdx, ahora crearemos un archivo con el nombre:  
+  >__`[...slug].astro`__
+  >```js
+  >---
+  >import { getCollection } from 'astro:content';
+  >import MDPostLayout from '../../layouts/MDPostLayout.astro';
+  >
+  >export async function getStaticPaths() {
+  >  const entradas = await getCollection('blog');
+  >  return entradas.map(entrada => ({
+  >    params: { slug: entrada.slug }, props: { entrada },
+  >  }));
+  >}
+  >
+  >const { entrada } = Astro.props;
+  >const { Content } = await entry.render();
+  >---
+  >```
+  >```html
+  ><MDPostLayout frontmatter={entry.data}>
+  >  <Content />
+  ></MDPostLayout>
+  >```
+
+- Elimnar las declaraciones de la variable layout en los frontmatter de los archivvos md, mdx, ya que ahor se encarga el archivo`[...slug].astro`de indicar donde esta el layout.
+## Cambiar `Astro.glob()`por `getCollection()` 
+- Modificar la pagina blog.astro y cualquier pagina donde haya una lista de enlaces a las entradas de blog con la funcion `getCollection()` 
+  >__blog.astro__
+  >```javascript
+  >---
+  >import { getCollection } from "astro:content";
+  >import Base from "../layouts/Base.astro";
+  >const posts = await getCollection("blog");
+  >const tituloPg = "Blog";
+  >---
+  >```
+  >```html
+  ><Base tituloPg={tituloPg}>
+  >  <p>aqui pondre las entradas de blog</p>
+  >  <ul>
+  >    {
+  >      posts.map((post) => (
+  >        <li>
+  >          <a href={`/blog/${post.slug}/`}>{post.data.titulo}</a>
+  >        </li>
+  >      ))
+  >    }
+  >  </ul>
+  ></Base>
+  >```
+

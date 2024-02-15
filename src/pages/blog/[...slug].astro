@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import MDPostLayout from "../../layouts/MDPostLayout.astro";
+
+export async function getStaticPaths() {
+  const entradas = await getCollection("blog");
+  return entradas.map((entrada:any) => ({
+    params: { slug: entrada.slug },
+    props: { entrada },
+  }));
+}
+
+const { entrada } = Astro.props;
+const { Content } = await entrada.render();
+--- 
+<MDPostLayout frontmatter={entrada.data}>
+  <Content />
+</MDPostLayout>
