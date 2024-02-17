@@ -80,74 +80,77 @@ Ver en el navegador en la direccion `http://localhost:4321`
 
 ## Crear nuevas paginas
 
-En la carpeta `src/pages/` crearemos las nuevas paginas:
-Cramos una pagina `about.astro`. Podemos copiar el cidogo del la pagina index. Modificamcos olo que hay dentro del `<body>':
+- En la carpeta `src/pages/` crearemos las nuevas paginas:
+- Cramos una pagina `about.astro`. Podemos copiar el cidogo del la pagina index. Modificamcos olo que hay dentro del `<body>':
 
-```html
-<body>
-  <h1>Mi sitio Astro</h1>
-  <h1>Sobre mi</h1>
-  <h2>... ¡y mi nuevo sitio Astro!</h2>
-
-  <p>
-    Estoy trabajando en el tutorial introductorio de Astro. Esta es la segunda
-    página de mi sitio web, ¡y es la primera que he construido yo mismo!
-  </p>
-
-  <p>
-    Este sitio se irá actualizando a medida que vaya completando más partes del
-    tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!
-  </p>
-</body>
-```
-
+  > ```html
+  > <body>
+  >   <h1>Mi sitio Astro</h1>
+  >   <h1>Sobre mi</h1>
+  >   <h2>... ¡y mi nuevo sitio Astro!</h2>
+  > 
+  >   <p>
+  >     Estoy trabajando en el tutorial introductorio de Astro. Esta es la segunda
+  >     página de mi sitio web, ¡y es la primera que he construido yo mismo!
+  >   </p>
+  > 
+  >   <p>
+  >     Este sitio se irá actualizando a medida que vaya completando más partes del
+  >     tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!
+  >   </p>
+  > </body>
+  > ```
+- [Paginas astro](https://docs.astro.build/es/basics/astro-pages/#p%C3%A1ginas-de-astro)
 ## Navegacion entre paginas
 
-Incluimos en todas las dos paginas los enlaces de ambas:
+- Incluimos en todas las dos paginas los enlaces de ambas:
 
-```html
-<a href="/">Inicio</a> <a href="/about/">Sobre mi</a>
-```
+  >```html
+  ><a href="/">Inicio</a> <a href="/about/">Sobre mi</a>
+  >```
 
-Creamos una pagina para el blog y ñadimos en enlace a esta en las paginas
+- Creamos una pagina para el blog y ñadimos en enlace a esta en las paginas
 
-```html
-<body>
-  <a href="/">Inicio</a>
-  <a href="/about/">Sobre mi</a>
-  <a href="/blog/">Blog</a>
-  <h1>Blog en Astro</h1>
-  <p>aqui pondre las entradas de blog</p>
-</body>
-```
+  >```html
+  ><body>
+  >  <a href="/">Inicio</a>
+  >  <a href="/about/">Sobre mi</a>
+  >  <a href="/blog/">Blog</a>
+  >  <h1>Blog en Astro</h1>
+  >  <p>aqui pondre las entradas de blog</p>
+  ></body>
+  >```
 
-## Archivos Markdown
+- Mas inforamcaion sobre enrutamiento basico en : [Enrutamiento basado en archivos](https://docs.astro.build/es/basics/astro-pages/#enrutamiento-basado-en-archivos)
+
+## Archivos Markdown
 
 - Creamos un directorio para las paginas del blog en una carpeta nueva `blog`dentro de `src/pages`
 - Añadimos un nuevo fichero con extension `md`
 
-```md
-data: 2022-07-01
-autor: 'Alumno de Astro'
-tags: ["astro", "bloguear", "aprender en público"]
-
----
-# Mi primera publicación en el blog
-Publicado el: 2022-07-01
-...
-```
+  > ```js
+  > --- 
+  > data: 2022-07-01
+  > autor: 'Alumno de Astro'
+  > tags: ["astro", "bloguear", "aprender en público"]
+  > ---
+  > # Mi primera publicación en el blog
+  > Publicado el: 2022-07-01
+  > ...
+  > ```
 
 - Se puede ver como queda al acceder a `http://localhost:4321/blog/1`
 - Añadimos el enlace de la nueva pagina en la pagina `blog`
 
-```html
-<ul>
-  <li><a href="/blog/1/">Publicación 1</a></li>
-</ul>
-```
-
-Añadimos mas publicaciones `md`y sus enlaces en la pagina blog
-
+  > ```html
+  > <ul>
+  >   <li><a href="/blog/1/">Publicación 1</a></li>
+  > </ul>
+  > ``` 
+- Añadimos mas publicaciones `md`y sus enlaces en la pagina blog.
+- [Sintaxis markdown](https://www.markdownguide.org/cheat-sheet/)
+- El espacio entre `---`se llama frontmatter y permite añadir variables con las que se puede interactuar en codigo javascript inseratado en el resto de la pagina.  
+- [frontmatter YAML](https://assemble.io/docs/YAML-front-matter.html)
 ## Componentes
 
 Son fragmentos de html reutilizables y que nos permiten ahorrar codigo y tiempo.
@@ -434,3 +437,64 @@ Sirven para gestionar grupos de archivos con contenido similar, por ejemplo un b
   ></Base>
   >```
 
+# Conceptos sobre Astro
+## Contenido dinamico
+- Que es el frontmatter: se puede añadir a la parte superior de los archivos astro, md,mdx. 
+- Se delimita entre dos filas de tres guiones `---` . 
+- Permite añadir variables. Lo hacemos en la pagina __`about.astro`__:
+  >```js 
+  >---
+  >import Base from '../layouts/Base.astro';
+  >const tituloPg = 'Sobre mi'; 
+  >const misdatos = {
+  >  nombre: 'Enrique',
+  >  pais: 'España',
+  >  soy:'desarrollador fullstack',
+  >  aficciones:['montaña','historia','cocina'],
+  >  conocimientos:['HTML','CSS','Javascript','React','Astro'],
+  >} 
+  >const fin = false;
+  >const llevo_dias = 5; 
+  >const estudiando = {
+  >  blog:    llevo_dias <= 3, //llevamos 3 dias o menos estudiando?
+  >  content: llevo_dias <= 6, // 
+  >  view:    llevo_dias <= 9,
+  >};
+  >---
+  >```
+  >```html
+  ><Base tituloPg={tituloPg}>
+  >  ...
+  >  ...
+  >  <li>Soy {misdatos.nombre} y vivo en {misdatos.pais} .Soy {misdatos.soy}.</li>
+  >  {misdatos.aficciones.length >= 2 &&
+  >    <li>Dos de mis aficiones son: {misdatos.aficciones[0]} y {misdatos.aficciones[1]}</li>
+  >  }
+  ></ul>
+  ><p>Mis habilidades son:</p>
+  ><ul>
+  >  {misdatos.conocimientos.map((skill) => <li>{skill}</li>)}
+  ></ul>
+  >{fin && <p>¡He terminado este tutorial!</p>}
+  > {
+  >     estudiando.blog    ? 
+  >    ( <p>Ahora estoy construyendo un blog .</p> ) 
+  >    :
+  >    (estudiando.content ?
+  >      <p>Estoy viendo como gestionar colecciones de contenido.</p> 
+  >      :
+  >      <p>WoW ¡View Transitions!.</p> )
+  >  }
+  ></Base>
+  >```
+- Como se renderizan los elementos de forma dinamica: las variables estan declaradas en el frontmatter. En la parte html, entre  llaves se ejecutara codigo javascript.
+-La funcion map funciona como un bucle, recorre la lista y la muestra element a elemento colocandolo dentro de un elemtno de lista.  
+- Hay varias expresiones booleannas. La variable fin esta en false, por tanto no se mostrara el texto que  esta a la derecha.
+- El objeto estudiando contiene varias expresiones booleanas que dependen del valor de dias. Con el condicional ternario `?`, se mostrara una parte u otra del texto. 
+- La pagina cuando llega a la web queda renderizada totalmetne en HTML sin nada de Javascript. 
+ 
+# View transitions
+actualizar
+pnpm install astro@latest
+
+Añadir viewtransitions al layout base
