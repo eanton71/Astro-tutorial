@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import Cabecera from "../components/Cabecera.astro";
 import PiePg from "../components/PiePg.astro"; 
 const {tituloPg} = Astro.props;
@@ -11,6 +12,7 @@ const {tituloPg} = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{tituloPg}</title>
+    <ViewTransitions />
   </head>
   <body>
     <Cabecera />

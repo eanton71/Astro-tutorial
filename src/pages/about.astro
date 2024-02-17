@@ -1,18 +1,51 @@
 ---
-import Base from '../layouts/Base.astro';
-const tituloPg = 'Sobre mi';
+import Base from "../layouts/Base.astro";
+const tituloPg = "Sobre mi";
+const misdatos = {
+  nombre: "Enrique",
+  pais: "España",
+  soy: "desarrollador fullstack",
+  aficciones: ["montaña", "historia", "cocina"],
+  conocimientos: ["HTML", "CSS", "Javascript", "React", "Astro"],
+};
+const fin = false;
+const llevo_dias = 5; 
+const estudiando = {
+  blog:    llevo_dias <= 3, //llevamos 3 dias o menos etudiando?
+  content: llevo_dias <= 6,
+  view:    llevo_dias <= 9,
+};
 ---
-
 <Base tituloPg={tituloPg}>
-    <h2>... ¡y mi nuevo sitio Astro!</h2>
-
-    <p>
-      Estoy trabajando en el tutorial introductorio de Astro. Esta es la segunda
-      página de mi sitio web, ¡y es la primera que he construido yo mismo!
-    </p>
-
-    <p>
-      Este sitio se irá actualizando a medida que vaya completando más partes
-      del tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!
-    </p>
-  </Base>
+  <h2>... ¡y mi nuevo sitio Astro!</h2>
+  <p>
+    Este sitio se irá actualizando a medida que vaya completando más partes del
+    tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!
+  </p>
+  <ul>
+    <li>
+      Soy {misdatos.nombre} y vivo en {misdatos.pais} .Soy {misdatos.soy}.
+    </li>
+    {
+      misdatos.aficciones.length >= 2 && (
+        <li>
+          Dos de mis aficiones son: {misdatos.aficciones[0]} y{" "}
+          {misdatos.aficciones[1]}
+        </li>
+      )
+    }
+  </ul>
+  <p>Mis habilidades son:</p>
+  <ul>
+    {misdatos.conocimientos.map((skill) => <li>{skill}</li>)}
+  </ul>
+  {fin && <p>¡He terminado este tutorial!</p>}
+  {
+     estudiando.blog    ? 
+    ( <p>Ahora estoy construyendo un blog .</p> ) 
+    :
+    (estudiando.content ?
+      <p>Estoy viendo como gestionar colecciones de contenido.</p> :
+      <p>WoW ¡View Transitions!.</p> )
+  }
+</Base>
