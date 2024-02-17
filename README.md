@@ -492,7 +492,35 @@ Sirven para gestionar grupos de archivos con contenido similar, por ejemplo un b
 - Hay varias expresiones booleannas. La variable fin esta en false, por tanto no se mostrara el texto que  esta a la derecha.
 - El objeto estudiando contiene varias expresiones booleanas que dependen del valor de dias. Con el condicional ternario `?`, se mostrara una parte u otra del texto. 
 - La pagina cuando llega a la web queda renderizada totalmetne en HTML sin nada de Javascript. 
- 
+
+## Css, estilos globales y locales
+### Estilos locales para la pagina `about.astro`
+### Variables CSS
+
+### Estilos globales
+- Se guardan en carpeta `src/styles`
+- Nombre `global.css`por ejemplo:
+html {
+  background-color: #f1f5f9;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 80ch;
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 1rem 0;
+  font-size: 2.5rem;
+}
 # View transitions
 actualizar
 pnpm install astro@latest
