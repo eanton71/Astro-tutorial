@@ -15,10 +15,11 @@ const estudiando = {
   content: llevo_dias <= 6,
   view:    llevo_dias <= 9,
 };
+const fuente = 'Courier New ';
 ---
 <Base tituloPg={tituloPg}>
   <h2>... ¡y mi nuevo sitio Astro!</h2>
-  <p>
+  <p style="color: brown; text-decoration: underline;">
     Este sitio se irá actualizando a medida que vaya completando más partes del
     tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!
   </p>
@@ -28,16 +29,20 @@ const estudiando = {
     </li>
     {
       misdatos.aficciones.length >= 2 && (
-        <li>
-          Dos de mis aficiones son: {misdatos.aficciones[0]} y{" "}
-          {misdatos.aficciones[1]}
+        <li class="aficciones">
+          Dos de mis aficiones son: 
+          <ol>
+          <li>{misdatos.aficciones[0]}</li>
+           
+          <li>{misdatos.aficciones[1]}</li>
+          </ol>
         </li>
       )
     }
   </ul>
   <p>Mis habilidades son:</p>
-  <ul>
-    {misdatos.conocimientos.map((skill) => <li>{skill}</li>)}
+  <ul class="conocimientos">
+    {misdatos.conocimientos.map((skill) => <li class="skill">{skill}</li>)}
   </ul>
   {fin && <p>¡He terminado este tutorial!</p>}
   {
@@ -49,3 +54,20 @@ const estudiando = {
       <p>WoW ¡View Transitions!.</p> )
   }
 </Base>
+<style define:vars={{fuente}}>
+h2 {
+  color: blueviolet;
+  background-color: aqua;
+}
+.aficciones ol{
+  color: green;
+  font-family: var(--fuente);
+}
+.conocimientos :nth-child(2n+1){
+color: blue;
+}
+.conocimientos :nth-child(2n){
+color: red;
+font-family: var(--fuente);
+}
+</style>
