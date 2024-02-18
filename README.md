@@ -493,34 +493,65 @@ Sirven para gestionar grupos de archivos con contenido similar, por ejemplo un b
 - El objeto estudiando contiene varias expresiones booleanas que dependen del valor de dias. Con el condicional ternario `?`, se mostrara una parte u otra del texto. 
 - La pagina cuando llega a la web queda renderizada totalmetne en HTML sin nada de Javascript. 
 
-## Css, estilos globales y locales
+## CSS, estilos globales y locales
 ### Estilos locales para la pagina `about.astro`
-### Variables CSS
-
+- Al final del archivo con la etiqueta `<style>` declaramos los estilos locales para esta pagina:
+  >```html
+  >.....
+  ><style>
+  >h2 {
+  >  color: blueviolet;
+  >  background-color: aqua;
+  >}
+  >.aficciones ol{
+  >  color: green;
+  >  font-family: 'Courier New';
+  >}
+  >.conocimientos :nth-child(2n+1){
+  >color: blue;
+  >}
+  >.conocimientos :nth-child(2n){
+  >color: red;
+  >font-family: 'Courier New';
+  >}
+  ></style>
+  >```
+- A los encabezados h2 le damos un color de fondo y otro para el texto. Las listas que estan dentro del tag con clase `aficciones` `<li class="aficciones">` tendran el texo en color verde y la fuente `'Courier New'` . Los elementos impares `:nth-child(2n+1)` dentro de la clase `conoocimientos` `<ul class="conocimientos">`tendran la fuente en color azul, los pares `:nth-child(2n)` color rojo y fuente `Courier New `
+- Se puede dar estilos a un elemento dentro de una etiqueta con el atributo style dentro de la etiqueta `<p style="color: brown; text-decoration: underline;">`
+### Variables CSS en frontmatter
+- Se pueden añadir variables en el frontmatter que pueden ser usadas luego en los estilos CSS. Por ejemplo definimos `const fuente = 'Courier New ';`
+- En la etiqueta `<style  define:vars={{fuente}}>`, la [__directiva__](https://docs.astro.build/es/reference/directives-reference/) `define:vars` contiene entre llaves tantas variables como se hayan declarado en el frontmatter.
+- Dentro de los selectores donde se vaya a usar se declara asi:
+   > ```css
+   > .conocimientos :nth-child(2n){
+   >  color: red;
+   >  font-family: var(--fuente);
+   > }
+   > ```
 ### Estilos globales
 - Se guardan en carpeta `src/styles`
-- Nombre `global.css`por ejemplo:
-html {
-  background-color: #f1f5f9;
-  font-family: sans-serif;
-}
-
-body {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 80ch;
-  padding: 1rem;
-  line-height: 1.5;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-h1 {
-  margin: 1rem 0;
-  font-size: 2.5rem;
-}
+- Nombre `global.css` por ejemplo:
+  > ```css
+  > html {
+  >   background-color: #f1f5f9;
+  >   font-family: sans-serif;
+  > }
+  > body {
+  >   margin: 0 auto;
+  >   width: 100%;
+  >   max-width: 80ch;
+  >   padding: 1rem;
+  >   line-height: 1.5;
+  > }
+  > * {
+  >   box-sizing: border-box;
+  > }
+  > h1 {
+  >   margin: 1rem 0;
+  >   font-size: 2.5rem;
+  > }
+  > ```
+- [Estilos CSS en Astro](https://docs.astro.build/es/guides/styling)
 # View transitions
 actualizar
 pnpm install astro@latest
