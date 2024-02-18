@@ -1,5 +1,60 @@
 ---
+
 ---
-<a href="/">Inicio</a>
-<a href="/blog/">Blog</a>
-<a href="/about/">Sobre mi</a>
+
+<div class="nav">
+  <ul>
+    <li>
+      <a href="/">Inicio</a>
+    </li>
+    <li>
+      <a href="/blog/">Blog</a>
+    </li>
+    <li>
+      <a href="/about/">Sobre mi</a>
+    </li>
+  </ul>
+</div>
+<style>
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav li {
+    margin-left: 5rem;
+  }
+
+  .nav a {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #475569;
+  }
+
+  .nav a:hover {
+    color: #482ff7;
+  }
+
+   
+
+  @media only screen and (max-width: 768px) {
+    .nav {
+      position: fixed;
+      left: -100%;
+      top: 5rem;
+      flex-direction: column;
+      background-color: #fff;
+      width: 100%;
+      border-radius: 10px;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    }
+    .nav.active {
+      left: 0;
+    }
+    .nav li {
+      margin: 2.5rem 0;
+    }
+  }
+</style>

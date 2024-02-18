@@ -552,6 +552,36 @@ Sirven para gestionar grupos de archivos con contenido similar, por ejemplo un b
   > }
   > ```
 - [Estilos CSS en Astro](https://docs.astro.build/es/guides/styling)
+## Scripts
+- Crearemos un script para añadir comoportamiento y estiulo Responsive a la aplicacion
+- Creamos un nuveo componente `Hamburguesa` para representar el menu de 3lineas para dispositivos modviles:
+  >```html
+  >---
+  >---
+  ><div class="hamburger">
+  >  <span class="line"></span>
+  >  <span class="line"></span>
+  >  <span class="line"></span>
+  ></div>
+  >```
+
+- Tendra que mostrarse en lacabecera por tanto lo importamos y lo colocamos en este archivo:
+  >Cabecera.astro
+  > ```js
+   > ---
+   > import Hamburguesa from './Hamburguesa.astro';
+   > import Navigation from './Navigation.astro';
+   > ---
+   >```
+   >```html
+   > <header>
+   >   <nav>
+   >     <Hamburguesa />
+   >     <Navigation />
+   >   </nav>
+   > </header>
+   > ```
+- Y añadimos nuevos estilos al archivo global de css   
 # View transitions
 actualizar
 pnpm install astro@latest

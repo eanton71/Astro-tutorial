@@ -1,10 +1,10 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 import { ViewTransitions } from "astro:transitions";
 import Cabecera from "../components/Cabecera.astro";
-import PiePg from "../components/PiePg.astro"; 
-const {tituloPg} = Astro.props;
+import PiePg from "../components/PiePg.astro";
+const { tituloPg } = Astro.props;
 ---
 
 <html lang="es">
@@ -19,7 +19,16 @@ const {tituloPg} = Astro.props;
   <body>
     <Cabecera />
     <h1>{tituloPg}</h1>
-    <slot/>
-    <PiePg /> 
+    <slot />
+    <PiePg />
+    <script>
+      const hamburger = document.querySelector(".hamburguesa");
+      const navMenu = document.querySelector(".nav");
+      hamburger.addEventListener("click", mobileMenu);
+      function mobileMenu() {
+        hamburger.classList.toggle("active");
+        navMenu.classList.toggle("active");
+      }
+    </script>
   </body>
 </html>
